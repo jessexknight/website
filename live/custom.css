@@ -1,0 +1,16 @@
+body {
+  font-family: "Century Gothic", sans-serif;
+}
+.columns{
+  padding: 5 5 5 5;
+}
+
+.callout{
+  padding: 5 5 5 5;
+}
+
+.button{
+  font-family: 'Century Gothic', sans-serif;
+  font-size: 20px;
+  padding: 0 0 0 0;
+}
