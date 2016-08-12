@@ -1,0 +1,19 @@
+body {
+  font-family: "Century Gothic", sans-serif;
+}
+.columns{
+  padding: 5;
+  margin: 0;
+}
+
+.title{
+  padding: 10;
+  margin: 10;
+  background-color: #CCCCCC;
+}
+
+.button{
+  font-family: 'Century Gothic', sans-serif;
+  font-size: 20px;
+  padding: 0 0 0 0;
+}
