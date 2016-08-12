@@ -3,7 +3,7 @@ import os
 import re
 import numpy as np
 import bibtexparser as bib
-import citationstyle as cite
+import pubs
 
 '''
 USAGE:
@@ -65,7 +65,7 @@ def print_yearstr(year):
   
 def print_pubstr(bibdata):
   # puberence format
-  specs = cite.basic()
+  specs = pubs.basic()
   # building the string
   pubstr = ''
   # for all elements
