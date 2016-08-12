@@ -40,12 +40,22 @@ def update_pubs():
   bidx = np.argsort(years)[::-1]
   
   # build the string for writing to the file
+<<<<<<< HEAD
   pubsstr = "<div class='title'><h1>Publications</h1></div>"
   for i in range(len(bidx)):
     pubsstr += newline + newline
     if (i==0) or (years[bidx[i]] < years[bidx[i-1]]): # current or changing year
       pubsstr += print_yearstr(years[bidx[i]])
     pubsstr += print_pubstr(B[bidx[i]])
+=======
+  pubsstr = "<h1>Publications</h1>"
+  for i in range(len(bidx)):
+    pubsstr += newline
+    if (i==0) or (years[bidx[i]] < years[bidx[i-1]]): # current or changing year
+      pubsstr += newline + print_yearstr(years[bidx[i]])
+    pubsstr += print_pubstr(B[bidx[i]])
+    
+>>>>>>> 682cecdfc7576750dd4358b50380ac80ed70a22c
   # write to the file
   file_write(src_pubhtml,pubsstr)
 

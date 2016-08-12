@@ -2,6 +2,7 @@ body {
   font-family: "Century Gothic", sans-serif;
 }
 .columns{
+<<<<<<< HEAD
   padding: 5;
   margin: 0;
 }
@@ -10,6 +11,13 @@ body {
   padding: 10;
   margin: 10;
   background-color: #CCCCCC;
+=======
+  padding: 5 5 5 5;
+}
+
+.callout{
+  padding: 5 5 5 5;
+>>>>>>> 682cecdfc7576750dd4358b50380ac80ed70a22c
 }
 
 .button{
