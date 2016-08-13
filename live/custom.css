@@ -1,27 +1,47 @@
-body {
+body{
   font-family: "Century Gothic", sans-serif;
+  font-size: 14px;
+  background-color: #222222;
 }
 .columns{
-<<<<<<< HEAD
-  padding: 5;
-  margin: 0;
-}
-
-.title{
-  padding: 10;
-  margin: 10;
-  background-color: #CCCCCC;
-=======
   padding: 5 5 5 5;
 }
-
-.callout{
-  padding: 5 5 5 5;
->>>>>>> 682cecdfc7576750dd4358b50380ac80ed70a22c
-}
-
 .button{
   font-family: 'Century Gothic', sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   padding: 0 0 0 0;
+}
+.title{
+  padding: 10 10 10 10;
+  background-color: #999999;
+}
+.content{
+  padding: 10 10 10 10;
+}
+h1{
+  font-family: "Century Gothic", sans-serif;
+  font-size: 24px;
+  color: #FFFFFF;
+}
+h2{
+  font-family: "Century Gothic", sans-serif;
+  font-size: 20px;
+  color: salmon;
+}
+h3{
+  font-family: "Century Gothic", sans-serif;
+  font-size: 16px;
+  color: #888888;
+}
+.aleft{
+  clear: left;
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+.aright{
+  clear: right;
+  float: right;
+  margin: 0;
+  padding: 0;
 }

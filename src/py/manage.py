@@ -4,64 +4,88 @@ import re
 import numpy as np
 import bibtexparser as bib
 import pubs
+import awards as awd
 
 '''
 USAGE:
 python manage.py [args], args:
-  pubs  - build adds the publications in src_pubbib to Publications.html
-  pages - build the navbar and update all pages with it.
+  pubs   - build the page Publications.html
+  awards - build the page Awards.html
+  pages  - build the navbar and update all pages with it.
 '''
 
 # globals ----------------------------------------------------------------------
-src_pubbib   = '../docs/pubs.bib'
-src_pubhtml  = '../pages/Publications.html'
-src_template = '../template.html'
+src_pubbib    = '../docs/pubs.bib'
+src_pubhtml   = '../pages/Publications.html'
+src_awardhtml = '../pages/Awards.html'
+src_template  = '../template.html'
 
-src_pages    = '../pages/'          # where this script finds the source pages
-dst_pages    = '../../live/pages/'  # where this script writes the output pages
-lnk_pages    = '../pages/'          # how the output pages reference each other
-newline      = '\n<br>'
+src_pages     = '../pages/'          # where this script finds the source pages
+dst_pages     = '../../live/pages/'  # where this script writes the output pages
+lnk_pages     = '../pages/'          # how the output pages reference each other
+newline       = '\n<br>'
 
-# pubs functions ----------------------------------------------------------------
+# awards functions ---------------------------------------------------------------
+def update_awards():
+  awards = awd.define()
+  awardstr = title_block('Honours & Awards','600px')
+  for award in awards:
+    if award[1] == 1:
+      awardstr += newline + awd.style_desc(award)
+    else:
+      awardstr += newline + awd.style_nodesc(award)
+  awardstr += '\n</div>\n'
+
+  file_write(src_awardhtml,awardstr)
+
+# pubs functions ---------------------------------------------------------------
 def update_pubs():
   global src_pubbib
   global src_pubhtml
   global newline
   
   # load and parse the bib file
-  f = open(src_pubbib)
-  bibdata = bib.loads(f.read())
-  B = bibdata.entries_dict.values()
+  def get_pubs(src_pubbib):
+    with open(src_pubbib) as f:
+      bibdata = bib.loads(f.read())
+      return bibdata.entries_dict.values()
   
   # sort by year
-  years = []
-  for b in B:
-    years += [b.get('year')]
-  bidx = np.argsort(years)[::-1]
+  def year_sort(B):
+    years = []
+    for i in range(0,len(B)):
+      years += [B[i].get('year')]
+      if years[i] is None:
+        years[i] = 3000
+    idx = np.argsort(years)[::-1]
+    years = [years[i] for i in idx]
+    B     = [B[i]     for i in idx]
+    return years, B
+  
+  # print formatted year
+  def print_yearstr(year):
+    if year != 3000:
+      yearstr = "<h3>" + year + "</h3>"
+    else:
+      yearstr = "<h3>Under Review & In Press</h3>"
+    return yearstr
   
   # build the string for writing to the file
-<<<<<<< HEAD
-  pubsstr = "<div class='title'><h1>Publications</h1></div>"
-  for i in range(len(bidx)):
-    pubsstr += newline + newline
-    if (i==0) or (years[bidx[i]] < years[bidx[i-1]]): # current or changing year
-      pubsstr += print_yearstr(years[bidx[i]])
-    pubsstr += print_pubstr(B[bidx[i]])
-=======
-  pubsstr = "<h1>Publications</h1>"
-  for i in range(len(bidx)):
-    pubsstr += newline
-    if (i==0) or (years[bidx[i]] < years[bidx[i-1]]): # current or changing year
-      pubsstr += newline + print_yearstr(years[bidx[i]])
-    pubsstr += print_pubstr(B[bidx[i]])
-    
->>>>>>> 682cecdfc7576750dd4358b50380ac80ed70a22c
-  # write to the file
-  file_write(src_pubhtml,pubsstr)
-
-def print_yearstr(year):
-  yearstr = "<h3>" + year + "</h3>"
-  return yearstr
+  def build_str(B,years):
+    pubstr = title_block('Publications','100%')
+    for i in range(len(B)):
+      pubstr += newline + newline
+      if (i==0) or (years[i] != years[i-1]): # current or changing year
+        pubstr += newline + print_yearstr(years[i])
+      pubstr += print_pubstr(B[i])
+    pubstr += "\n</div>"
+    return pubstr
+  
+  # update_pubs main
+  B = get_pubs(src_pubbib)
+  years, B = year_sort(B)
+  pubstr = build_str(B,years)
+  file_write(src_pubhtml,pubstr)
   
 def print_pubstr(bibdata):
   # puberence format
@@ -76,6 +100,7 @@ def print_pubstr(bibdata):
     if data is not None:
       # find the keyword to replace
       pubstr += e.replace(key,data)
+      
   return pubstr
 
 # pages functions ---------------------------------------------------------------
@@ -142,12 +167,18 @@ def file_write(fname, lines):
   with open(fname,'w') as f:
     for line in lines:
       f.write(line)
+      
+def title_block(title,contentwidth):
+  return "<div class='title'><h1>"+title+"</h1></div>\n"+\
+         "<div class='content' style='width: "+contentwidth+"; max-width: 100%;'>"
 
 # main -------------------------------------------------------------------------
 if len(sys.argv) == 2:
   useroption = sys.argv[1]
   if useroption in 'pubs':
     update_pubs()
+  elif useroption in 'awards':
+    update_awards()
   elif useroption in 'pages':
     update_pages()
   else:

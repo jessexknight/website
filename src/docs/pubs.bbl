@@ -1,0 +1,37 @@
+\begin{thebibliography}{HPW+16}
+
+\bibitem[FKA+15]{Fanou2015}
+E~M Fanou, Jesse Knight, R~I Aviv, S-P Hojjat, S~P Symons, L~Zhang, and M~Wintermark.
+\newblock {Effect of Collaterals on Clinical Presentation, Baseline Imaging, Complications, and Outcome in Acute Stroke.}
+\newblock \emph{AJNR. American journal of neuroradiology}, 36(12):2285–91, dec 2015.
+\newblock URL: \url{http://www.ajnr.org/content/early/2015/10/15/ajnr.A4453.abstract?rss=1}, \href{http://dx.doi.org/10.3174/ajnr.A4453}{doi:10.3174/ajnr.A4453}.
+
+\bibitem[HPW+16]{Huynh2016b}
+Dan~C. Huynh, Mark~W. Parsons, Max Wintermark, Achala Vagal, Christopher~D. D'Esterre, Rita Vitorino, Daniel Efkehari, Jesse Knight, Thien~J. Huynh, Andrew Bivard, Rick Swartz, Sean Symons, and Richard~I. Aviv.
+\newblock {Can CT perfusion accurately assess infarct core?}
+\newblock \emph{Neurovascular Imaging}, 2(7):1–7, dec 2016.
+\newblock URL: \url{http://www.nvijournal.com/content/2/1/7}, \href{http://dx.doi.org/10.1186/s40809-016-0018-1}{doi:10.1186/s40809-016-0018-1}.
+
+\bibitem[KK16a]{Knight2016b}
+Jesse Knight and April Khademi.
+\newblock {Disease-Inspired Feature Design for Computer-Aided Diagnosis of Breast Cancer Digital Pathology Images}.
+\newblock In \emph{Medical Image Analysis and Informatics: Computer-aided Diagnosis and Therapy 2}, pages TBD.
+\newblock CRC Press, 2016.
+
+\bibitem[KK16b]{Knight2016a}
+Jesse Knight and April Khademi.
+\newblock {MS Lesion Segmentation Using FLAIR MRI Only}.
+\newblock In \emph{Medical Image Computing and Computer-Assisted Intervention – MICCAI 2016}, TBD. Athens, Greece, 2016.
+
+\bibitem[KMK16]{Knight2016}
+Jesse Knight, Alan~R Moody, and April Khademi.
+\newblock {Noise in parallel MRI: how to determine whether single-coil assumptions still hold (they don't) (Poster)}.
+\newblock In \emph{Imaging Network Ontario Symposium}. Toronto, 2016.
+
+\bibitem[RKMK16]{Reiche}
+Brittany Reiche, Jesse Knight, Alan~R Moody, and April Khademi.
+\newblock {Segmentation and Characterization of WML in FLAIR MRI}.
+\newblock In \emph{Medical Image Analysis and Informatics: Computer-aided Diagnosis and Therapy 2}, pages TBD.
+\newblock CRC Press, 2016.
+
+\end{thebibliography}
