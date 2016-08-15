@@ -1,47 +1,79 @@
 body{
-  font-family: "Century Gothic", sans-serif;
+  font-family: 'Open Sans', "Century Gothic", sans-serif;
   font-size: 14px;
-  background-color: #222222;
+  background-color: #333333;
+}
+.row{
+  background-color:#E5E5E5;
+  border-left: solid thick #333333;
+  max-width:100%;
 }
 .columns{
-  padding: 5 5 5 5;
+  padding: 0;
 }
 .button{
   font-family: 'Century Gothic', sans-serif;
   font-size: 16px;
-  padding: 0 0 0 0;
+  padding: 0;
 }
-.title{
-  padding: 10 10 10 10;
-  background-color: #999999;
+.divh1{
+  padding: 8 8 8 8;
+  margin: 0;
+  clear: both;
+  background-color: #2199E8;
+  border-left: solid thick #333333;
+}
+.divh2{
+  padding: 5 8 5 8;
+  margin: 10 0 10 0;
+  clear: both;
+  background-color: #E5E5E5;
+  border-left: solid thick #2199E8;
 }
 .content{
-  padding: 10 10 10 10;
+  padding: 0;
 }
 h1{
-  font-family: "Century Gothic", sans-serif;
+  font-family: 'Century Gothic', sans-serif;
   font-size: 24px;
   color: #FFFFFF;
+  padding: 0;
+  margin: 0 0 0 10;
 }
 h2{
-  font-family: "Century Gothic", sans-serif;
+  font-family: 'Century Gothic', sans-serif;
   font-size: 20px;
-  color: salmon;
+  color: #00669C;
+  padding: 0;
+  margin: 0 0 0 10;
 }
 h3{
-  font-family: "Century Gothic", sans-serif;
+  font-family: 'Century Gothic', sans-serif;
   font-size: 16px;
   color: #888888;
+  padding: 0;
+  margin: 10 0 10 28;
+}
+p{
+  padding: 0;
+  margin:  12 0 0 28;
 }
 .aleft{
   clear: left;
   float: left;
-  margin: 0;
+  display: inline-block;
+  margin:  4 0 0 28;
   padding: 0;
 }
 .aright{
   clear: right;
   float: right;
-  margin: 0;
+  display: inline-block;
+  margin:  4 0 0 28;
   padding: 0;
+}
+a{
+  color: #2199E8;
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
 }
