@@ -25,7 +25,7 @@ def awards():
          'Awarded by the Engineering Society to the best teaching assistant, as voted by the students.'],\
   [1, 1, 'E.B. MacNaughton Convocation Medal',\
          'July 2015',\
-         'Awarded to the College of Physical and Engineering Science"s nominee for the W.C. Winegard Medal, the most prestigious graduating award at the University of Guelph.'],\
+         'Awarded to the College of Physical and Engineering Sciences nominee for the W.C. Winegard Medal, the most prestigious graduating award at the University of Guelph.'],\
   [1, 1, 'Association of the Processional Engineers Medal',\
          'July 2015',\
          'In recognition of outstanding scholastic performance at the undergraduate level in an engineering program.'],\
