@@ -15,29 +15,8 @@ python manage.py [args], args:
 # ------------------------------------------------------------------------------
 # globals
 # ------------------------------------------------------------------------------
-# src_: compile-time links
-# dst_: writing links
-# lnk_: live links
 
-# src_awardhtml  = '../pages/Awards.html'
-
-# src_pubbib     = '../docs/pubs.bib'
-# src_pubhtml    = '../pages/Publications.html'
-
-# src_matlabhtml = '../pages/MATLAB.html'
-# src_matlab     = '../pages/matlab/'
-# dst_matlab     = '../../live/pages/matlab/'
-# lnk_matlab     = '/matlab/'
-
-# src_docs       = '../../live/docs/'
-# lnk_docs       = '../docs/'
-
-# src_template   = '../template.html'   # the template to add content to
-# src_pages      = '../pages/'          # where this script finds the source pages
-# dst_pages      = '../../live/pages/'  # where this script writes the output pages
-# lnk_pages      = ''                   # how the output pages reference each other
-
-newline        = '\n<br>'
+newline = '\n<br>'
 X = {\
 'template':{\
   'html' : '../template.html'},\
@@ -188,24 +167,37 @@ def update_pages():
 
 def make_navbar(src_pages,dst_pages,lnk_pages):
   global newline
+  
+  # build the paths from found pages
+  def set_paths(file,navstr,srcpaths,dstpaths,lnk_pages,src_pages,dst_pages):
+    pagename = os.path.splitext(file)[0]
+    link     = os.path.join(lnk_pages,file)
+    srcpath  = os.path.join(src_pages,file)
+    dstpath  = os.path.join(dst_pages,file)
+    # print the link to the string
+    navstr  += "      " + print_navlink(link, pagename) + "\n"
+    # store the page names and links
+    srcpaths.append(srcpath)
+    dstpaths.append(dstpath)
+    return [navstr,srcpaths,dstpaths]
+  
   # find page names, and add them as links in the menu
   navstr  = "<ul class='expanded dropdown menu' data-dropdown-menu><li>\n"
   srcpaths = []
   dstpaths = []
   for root, dirs, files in os.walk(src_pages):
     for file in files:
+      # ensure home page link is added at the top
+      if file == "Home.html":
+        [navstr,srcpaths,dstpaths] = set_paths(
+        file,navstr,srcpaths,dstpaths,lnk_pages,src_pages,dst_pages)
+    for file in files:
       # find the page name, define the links, and store the file locations
       # only if the page is a main page (not in subdirectories)
-      if root in src_pages:
-        pagename = os.path.splitext(file)[0]
-        link     = os.path.join(lnk_pages,file)
-        srcpath  = os.path.join(src_pages,file)
-        dstpath  = os.path.join(dst_pages,file)
-        # print the link to the string
-        navstr  += "      " + print_navlink(link, pagename) + "\n"
-        # store the page names and links
-        srcpaths.append(srcpath)
-        dstpaths.append(dstpath)
+      if root in src_pages and file != "Home.html":
+        [navstr,srcpaths,dstpaths] = set_paths(
+        file,navstr,srcpaths,dstpaths,lnk_pages,src_pages,dst_pages)
+        
   navstr += "    </li></ul>"
   return [navstr, srcpaths, dstpaths]
 
