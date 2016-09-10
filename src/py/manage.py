@@ -69,10 +69,6 @@ def update_awards():
 # ------------------------------------------------------------------------------
 
 def update_pubs():
-  # global src_pubbib
-  # global src_pubhtml
-  # global scr_docs
-  # global lnk_docs
   global X
   global newline
   
@@ -105,31 +101,11 @@ def update_pubs():
 # ------------------------------------------------------------------------------
 
 def update_matlab():
-  # global src_pubbib
-  # global src_pubhtml
-  # global scr_docs
-  # global lnk_docs
   global newline
   global X
   
-  # print formatted year seperator
-  def print_yearstr(year):
-    if year != np.inf:
-      yearstr = print_h2(year)
-    else:
-      yearstr = print_h2('Under Review & In Press')
-    return yearstr
   
-  # build the string for writing to the file
-  def build_str(B,years):
-    pubstr = print_h1('Publications','100%')
-    for i in range(len(B)):
-      if (i==0) or (years[i] != years[i-1]): # current or changing year
-        pubstr += print_yearstr(years[i])
-      pubstr += '<p>'+pubs.printstr(B[i],[X['docs']['src'],X['docs']['lnk']])+'</p>'
-    pubstr += "\n</div>\n"
-    return pubstr
-  
+    
   # update_pubs main
   B = pubs.parse(X['pubs']['bib'])
   years, B = pubs.sortyears(B)
@@ -141,62 +117,62 @@ def update_matlab():
 # ------------------------------------------------------------------------------
 
 def update_pages():
-  # global src_template
-  # global src_pages
-  # global dst_pages
-  # global lnk_pages
   global X
   global newline
   
   # generate the navbar string
-  [navstr, srcpaths, dstpaths] = make_navbar(\
-        X['pages']['src'], X['pages']['dst'],X['pages']['lnk'])
+  [navstr, srcpaths, dstpaths] = make_navbar()
   
   # add the navbar to the template file
   template = file_read(X['template']['html'])
-  for i in range(0,len(template)):
-    template[i] = template[i].replace('__navbar__',navstr)
-    if template[i].find('__content__') > 0:
-      idx = i
-
+  template = add_to_template(template,'__navbar__',navstr)
+  
   # for all pages, add their contents
   for p in range(0,len(srcpaths)):
-    pagestr = template[:]
-    pagestr[idx:idx+1] = file_read(srcpaths[p])
-    file_write(dstpaths[p],pagestr)
+    content = file_read(srcpaths[p])
+    pagestr = add_to_template(template,'__content__',content)
+    file_write(dstpaths[p], pagestr)
 
-def make_navbar(src_pages,dst_pages,lnk_pages):
+def add_to_template(template,keystr,content):
+  for i in range(0,len(template)):
+    if template[i].find(keystr) > 0:
+      idx = i
+  pagestr = template[:idx]
+  pagestr += content[:]
+  pagestr += template[idx+1:]
+  return pagestr
+    
+def make_navbar():
+  global X
   global newline
   
   # build the paths from found pages
-  def set_paths(file,navstr,srcpaths,dstpaths,lnk_pages,src_pages,dst_pages):
-    pagename = os.path.splitext(file)[0]
-    link     = os.path.join(lnk_pages,file)
-    srcpath  = os.path.join(src_pages,file)
-    dstpath  = os.path.join(dst_pages,file)
-    # print the link to the string
-    navstr  += "      " + print_navlink(link, pagename) + "\n"
+  def nav_paths(file,navstr,srcpaths,dstpaths,ismain):
+    pagename      = os.path.splitext(file)[0]
+    link          = os.path.join(X['pages']['lnk'],file)
     # store the page names and links
-    srcpaths.append(srcpath)
-    dstpaths.append(dstpath)
+    srcpaths.append(os.path.join(X['pages']['src'],file))
+    dstpaths.append(os.path.join(X['pages']['dst'],file))
+    # print the link to the string
+    if ismain:
+      navstr  += "      " + print_navlink(link, pagename) + "\n"
     return [navstr,srcpaths,dstpaths]
   
   # find page names, and add them as links in the menu
   navstr  = "<ul class='expanded dropdown menu' data-dropdown-menu><li>\n"
   srcpaths = []
   dstpaths = []
-  for root, dirs, files in os.walk(src_pages):
+  for root, dirs, files in os.walk(X['pages']['src']):
     for file in files:
       # ensure home page link is added at the top
       if file == "Home.html":
-        [navstr,srcpaths,dstpaths] = set_paths(
-        file,navstr,srcpaths,dstpaths,lnk_pages,src_pages,dst_pages)
+        [navstr,srcpaths,dstpaths] = nav_paths(file,navstr,srcpaths,dstpaths,True)
     for file in files:
       # find the page name, define the links, and store the file locations
       # only if the page is a main page (not in subdirectories)
-      if root in src_pages and file != "Home.html":
-        [navstr,srcpaths,dstpaths] = set_paths(
-        file,navstr,srcpaths,dstpaths,lnk_pages,src_pages,dst_pages)
+      if root in X['pages']['src'] and file != "Home.html":
+        ismain = root in X['pages']['src']
+        [navstr,srcpaths,dstpaths] = nav_paths(file,navstr,srcpaths,dstpaths,ismain)
         
   navstr += "    </li></ul>"
   return [navstr, srcpaths, dstpaths]

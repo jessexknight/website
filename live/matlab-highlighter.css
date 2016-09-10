@@ -1,0 +1,13 @@
+/*
+ MATLAB Highlighter 1.27, a small and lightweight JavaScript library for colorizing your MATLAB syntax.
+ http://matlabtricks.com/matlab-highlighter
+ Licensed under the MIT license
+ Copyright (c) 2013, Zoltan Fegyver
+ Edits: 2016, Jesse Knight
+*/
+pre {font-size: 12px; font-family: Consolas, monaco, monospace; color: #333333}
+pre.matlab-code .keyword {color: #0099ff;}
+pre.matlab-code .string  {color: #cc00ff;}
+pre.matlab-code .number  {color: #993333;}
+pre.matlab-code .comment, pre.matlab-code .comment span {color: #33cc33; font-weight: normal;}
+pre.matlab-code .bracket {color: #999999;}
