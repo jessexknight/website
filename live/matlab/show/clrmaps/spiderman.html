@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="../../matlab-highlighter.css" type="text/css">
+<script src="../../matlab-highlighter.js"></script>
+<div onload="highlightMATLABCode();">
+<h1>
+spiderman.m</h1>
+<a href="
+spiderman.m" download="
+spiderman.m" style='padding: 5px 5px 5px 5px;'>Download</a>
+<pre class="matlab-code">
+function [cmap] = spiderman(m)
+% colormap: blue-black-red (for difference images)
+if nargin < 1
+   m = size(get(gcf,'colormap'),1);
+end
+n = fix(m/2)-1;
+r = [zeros(1,n+2) (1:+1:n)/n]';
+g = zeros(1,m)';
+b = [(n:-1:1)/n zeros(1,n+2)]';
+cmap = [r,g,b];
+</pre>
+</div>

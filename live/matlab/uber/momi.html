@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="../../matlab-highlighter.css" type="text/css">
+<script src="../../matlab-highlighter.js"></script>
+<div onload="highlightMATLABCode();">
+<h1>
+momi.m</h1>
+<a href="
+momi.m" download="
+momi.m" style='padding: 5px 5px 5px 5px;'>Download</a>
+<pre class="matlab-code">
+% [X,mm] = momi(X);
+% 
+% MOMI normalizes the data in X to the range [0,1] using the max-min
+%   of the data.
+% 
+% Jesse Knight 2016
+
+function [X,mm] = momi(X)
+mm = [min(X(:)),max(X(:))];
+X = (X-mm(1))./diff(mm);</pre>
+</div>

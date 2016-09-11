@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="../../matlab-highlighter.css" type="text/css">
+<script src="../../matlab-highlighter.js"></script>
+<div onload="highlightMATLABCode();">
+<h1>
+savefig.m</h1>
+<a href="
+savefig.m" download="
+savefig.m" style='padding: 5px 5px 5px 5px;'>Download</a>
+<pre class="matlab-code">
+% [] = savefig(savename)
+% 
+% SAVEFIG saves the current onscreen figure to a .png file exactly as it
+%   appears, using imwrite. Other figure export options tend to behave 
+%   unexpectedly.
+% 
+% Jesse Knight 2016
+
+function [] = savefig(savename)
+drawnow;
+frame = getframe(gcf);
+imwrite(frame.cdata,savename,'PNG');
+
+</pre>
+</div>
