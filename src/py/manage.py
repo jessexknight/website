@@ -129,7 +129,6 @@ def update_matlab():
   # copy all source code
   copyover(X['mlab']['code']['src'], X['mlab']['code']['dst'])
 
-  print(X['mlab']['pages']['tmp'])
   # generate template file
   template = file_read(X['mlab']['pages']['tmp'])
 
@@ -163,80 +162,65 @@ def print_matlink(pagelink,pagename):
 
 def update_pages():
   global X
-  global newline
   
-  # generate the navbar string
-  [navstr, srcpaths, dstpaths] = make_navbar()
-  
-  # add the navbar to the template file
-  template = file_read(X['template']['html'])
-  template = add_to_template(template,'__navbar__',navstr)
-  
-  # for all pages, add their contents
-  for p in range(0,len(srcpaths)):
-    content = file_read(srcpaths[p])
-    pagestr = add_to_template(template,'__content__',content)
-    file_write(dstpaths[p], pagestr)
-
-def add_to_template(template,keystr,content):
-  for i in range(0,len(template)):
-    if template[i].find(keystr) >= 0:
-      idx = i
-  pagestr = template[:idx]
-  pagestr += content[:]
-  pagestr += template[idx+1:]
-  return pagestr
-
-def make_navbar():
-  global X
-  global newline
-  
-  # build the paths from found pages
-  def nav_link(file,navstr,srcpaths,dstpaths):
-    pagename      = os.path.splitext(file)[0]
-    link          = os.path.join(X['pages']['lnk'],file)
-    # store the page names and links
-    srcpaths.append(os.path.join(X['pages']['src'],file))
-    dstpaths.append(os.path.join(X['pages']['dst'],file))
-    # print the link to the string
-    navstr  += "      " + print_navlink(link, pagename) + "\n"
-    return [navstr,srcpaths,dstpaths]
-  
-  # find page names, and add them as links in the menu
-  navstr  = "<ul class='expanded dropdown menu' data-dropdown-menu><li>\n"
-  # ensure home page link is added at the top
-  [navstr,srcpaths,dstpaths] = nav_link("Home.html",navstr,[],[])
   # main pages
-  for root, dirs, files in os.walk(X['pages']['src']):
-    for file in files:
-      if file != "Home.html":
-        [navstr,srcpaths,dstpaths] = nav_link(file,navstr,srcpaths,dstpaths)
-  # matlab pages
-  for root, dirs, files in os.walk(X['mlab']['pages']['dst']):
-    for file in files:
-      if file != "template.html":
-        print(rel_link(os.path.join(root,file),X['pages']['src']))
+  for root, dirs, pages in os.walk(X['pages']['src']):
+    for page in pages:
+      src = os.path.join(root,page)
+      dst = os.path.join(X['pages']['dst'],page)
+      print_page(src,dst)
+  # MATLAB pages
+  for root, dirs, pages in os.walk(X['mlab']['pages']['dst']):
+    for page in pages:
+      src = os.path.join(root,page)
+      dst = os.path.join(root,page)
+      print_page(src,dst)
+
+def print_page(src,dst):
+  # read the template
+  template = file_read(X['template']['html'])
+  # read the file contents
+  content  = file_read(src)
+  # generate the navbar using relative links
+  navstr   = print_navbar(dst)
+  # add the content and navbar
+  pagestr  = add_to_template(template,'__content__',content)
+  pagestr  = add_to_template(pagestr, '__navbar__',navstr)
+  # write to file
+  file_write(dst,pagestr)
+
+def print_navbar(filepath):
+  # print the navbar for any particular html page
+  global X
   
+  # print the navlink from the html page to one of the main pages
+  def nav_link(navstr,linkbase,page):
+    pagename = os.path.splitext(page)[0]
+    link     = os.path.join(linkbase,page)
+    navstr  += "      " + print_navlink(link, pagename) + "\n"
+    return navstr
+  
+  # get the relative link path
+  linkbase = rel_link(filepath,X['pages']['dst'])
+  
+  # Home first
+  navstr  = "<ul class='expanded dropdown menu' data-dropdown-menu><li>\n"
+  navstr = nav_link(navstr,linkbase,"Home.html")
+  # walk the other main pages for the navbar
+  for root, dirs, pages in os.walk(X['pages']['src']):
+    for page in pages:
+      if page != "Home.html":
+        navstr = nav_link(navstr,linkbase,page)
   navstr += "    </li></ul>"
-  return [navstr, srcpaths, dstpaths]
+  return navstr  
     
 def print_navlink(pagelink,pagename):
   navlinkstr = "<a class='expanded button' href='" \
              + pagelink + "'>" + pagename + "</a>"
   return navlinkstr
 
-def rel_link(src,dst):
-  # find the relative link between paths
-  def seps(path):
-    return path.count('\\') + path.count('/')
-
-  common = os.path.commonprefix([src,dst])
-  backup = seps(src) - seps(common)
-  link   = '../'*backup + dst.replace(common,'')
-  return link
-  
 # ------------------------------------------------------------------------------
-# general file printing functions
+# misc. functions
 # ------------------------------------------------------------------------------
 
 def file_read(fname):
@@ -251,7 +235,7 @@ def file_write(fname, lines):
   # overwtrite file entirely
   with open(fname,'w') as f:
     for line in lines:
-      f.write(line.encode('ascii', 'replace'))
+      f.write(line)#.encode('ascii', 'replace'))
       
 def print_h1(str,contentwidth):
   return "<div class='divh1'><h1>"+str+"</h1></div>\n"+\
@@ -271,6 +255,26 @@ def copyover(src,dst):
     else:
       print('%s' % e)
 
+def add_to_template(template,keystr,content):
+  for i in range(0,len(template)):
+    if template[i].find(keystr) >= 0:
+      idx = i
+  pagestr = template[:idx]
+  pagestr += content[:]
+  pagestr += template[idx+1:]
+  return pagestr
+  
+def rel_link(src,dst):
+  # find the relative link between paths
+  def seps(path):
+    return path.count('\\') + path.count('/')
+
+  common = os.path.commonprefix([src,dst])
+  backup = seps(src) - seps(common)
+  link   = '../'*backup + dst.replace(common,'')
+  return link
+  
+      
 # ------------------------------------------------------------------------------
 # main
 # ------------------------------------------------------------------------------
