@@ -43,8 +43,9 @@ X = {\
   'lnk'  : '../docs/'},\
 'pages':{\
   'src'  : '../pages/',\
-  'dst'  : '../../live/pages/',\
-  'lnk'  : ''}\
+  'dst'  : '../../live/pages/'},\
+'style':{\
+  'dst'  : '../../live/'}\
 }
 
 # ------------------------------------------------------------------------------
@@ -52,17 +53,7 @@ X = {\
 # ------------------------------------------------------------------------------
 
 def update_awards():
-  awardstr = print_h1('Funding & Awards','800px')
-  
-  def print_awardlist(awards):
-    awardstr = ''
-    for award in awards:
-      if award[1] == 1:
-        awardstr += awds.print_desc(award)
-      else:
-        awardstr += awds.print_nodesc(award)
-    return awardstr
-
+  awardstr =  print_h1('Funding & Awards','800px')
   awardstr += print_h2('Funding')
   awardstr += print_awardlist(awds.funds())
   awardstr += '<p style="clear:both">'+newline+'</p>'
@@ -71,6 +62,15 @@ def update_awards():
   awardstr += '\n</div>\n'
   file_write(X['awds']['html'],awardstr)
 
+def print_awardlist(awards):
+  awardstr = ''
+  for award in awards:
+    if award[1] == 1:
+      awardstr += awds.print_desc(award)
+    else:
+      awardstr += awds.print_nodesc(award)
+  return awardstr
+
 # ------------------------------------------------------------------------------
 # pubs functions
 # ------------------------------------------------------------------------------
@@ -78,31 +78,29 @@ def update_awards():
 def update_pubs():
   global X
   global newline
-  
-  # print formatted year seperator
-  def print_yearstr(year):
-    if year != np.inf:
-      yearstr = print_h2(year)
-    else:
-      yearstr = print_h2('Under Review & In Press')
-    return yearstr
-  
-  # build the string for writing to the file
-  def build_str(B,years):
-    pubstr = print_h1('Publications','100%')
-    for i in range(len(B)):
-      if (i==0) or (years[i] != years[i-1]): # current or changing year
-        pubstr += print_yearstr(years[i])
-      pubstr += '<p>'+pubs.printstr(B[i],[X['docs']['src'],X['docs']['lnk']])+'</p>'
-    pubstr += "\n</div>\n"
-    return pubstr
-  
+
   # update_pubs main
   B = pubs.parse(X['pubs']['bib'])
   years, B = pubs.sortyears(B)
   pubstr = build_str(B,years)
   file_write(X['pubs']['html'],pubstr)
 
+def print_yearstr(year):
+  if year != np.inf:
+    yearstr = print_h2(year)
+  else:
+    yearstr = print_h2('Under Review & In Press')
+  return yearstr
+
+def build_str(B,years):
+  pubstr = print_h1('Publications','100%')
+  for i in range(len(B)):
+    if (i==0) or (years[i] != years[i-1]): # current or changing year
+      pubstr += print_yearstr(years[i])
+    pubstr += '<p>'+pubs.printstr(B[i],[X['docs']['src'],X['docs']['lnk']])+'</p>'
+  pubstr += "\n</div>\n"
+  return pubstr
+  
 # ------------------------------------------------------------------------------
 # matlab functions
 # ------------------------------------------------------------------------------
@@ -111,20 +109,8 @@ def update_matlab():
   global newline
   global X
   
-  def mlab_link(mlabstr,root,file):
-    # names
-    subdir   = root.replace(X['mlab']['code']['src'],'')
-    pagename = file.replace('.m','.html')
-    # html pages
-    link     = os.path.join(X['mlab']['pages']['lnk'],subdir,pagename)
-    src      = os.path.join(root,file)
-    dst      = os.path.join(X['mlab']['pages']['dst'],subdir,pagename)
-    # add the link to main page
-    mlabstr += '\n' + print_matlink(link,file)
-    return [mlabstr,pagename,src,dst]
-  
   # update_matlab main
-  mlabstr = "<div class='divh1'><h1>MATLAB Code</h1></div>"
+  mlabstr = print_h1("MATLAB Code",'100%')
 
   # copy all source code
   copyover(X['mlab']['code']['src'], X['mlab']['code']['dst'])
@@ -133,28 +119,53 @@ def update_matlab():
   template = file_read(X['mlab']['pages']['tmp'])
 
   # walk the source
+  lastdir = ''
   for root, dirs, files in os.walk(X['mlab']['code']['src']):
-    if root != X['mlab']['code']['src']: # don't copy template
-      for file in files:
-        if '.m' in file:
-          # create the link
-          [mlabstr,pagename,src,dst] = mlab_link(mlabstr,root,file)
-          # create the page
-          pagestr = template
-          codestr = file_read(src)
-          pagestr = add_to_template(pagestr,'__filename__',file)
-          pagestr = add_to_template(pagestr,'__download__',file)
-          pagestr = add_to_template(pagestr,'__link__',file)
-          pagestr = add_to_template(pagestr,'__code__',codestr)
-          file_write(dst,pagestr)
-
+    for file in files:
+      if '.m' in file:
+        # create a title using subdirectory if it is new
+        subdir = rel_link(X['mlab']['code']['src'],root)
+        [mlabstr,lastdir] = print_mlabdiv(mlabstr,lastdir,subdir)
+        # create the link
+        [mlabstr,pagename,src,dst] = mlab_link(mlabstr,root,file)
+        # create the page
+        pagestr = template
+        codestr = file_read(src)
+        pagestr = add_to_template(pagestr,'__filename__',file)
+        pagestr = add_to_template(pagestr,'__download__',file)
+        pagestr = add_to_template(pagestr,'__link__',file)
+        pagestr = add_to_template(pagestr,'__code__',codestr)
+        file_write(dst,pagestr)
+  
+  mlabstr += '</div>\n</div>\n'
   file_write(X['mlab']['html'],mlabstr)
-      
-def print_matlink(pagelink,pagename):
+
+def mlab_link(mlabstr,root,file):
+  # names
+  subdir   = root.replace(X['mlab']['code']['src'],'')
+  pagename = file.replace('.m','.html')
+  # html pages
+  link     = os.path.join(X['mlab']['pages']['lnk'],subdir,pagename)
+  src      = os.path.join(root,file)
+  dst      = os.path.join(X['mlab']['pages']['dst'],subdir,pagename)
+  # add the link to main page
+  mlabstr += '\n' + print_mlablink(link,file)
+  return [mlabstr,pagename,src,dst]
+
+def print_mlablink(pagelink,pagename):
   matlinkstr = "<p><pre><a href='" \
                + pagelink + "'>" \
                + pagename + "</a></pre></p>"
   return matlinkstr
+
+def print_mlabdiv(mlabstr,lastdir,subdir):
+  if subdir != lastdir:
+    if lastdir != '':
+      mlabstr += '</div>' # close the last div
+    lastdir = subdir
+    mlabstr += "<div class='small-12 medium-6 large-4 columns' style='padding:0 10 0 0;'>" \
+            +  print_h2(subdir)
+  return [mlabstr,lastdir]
   
 # ------------------------------------------------------------------------------
 # pages functions
@@ -166,39 +177,41 @@ def update_pages():
   # main pages
   for root, dirs, pages in os.walk(X['pages']['src']):
     for page in pages:
-      src = os.path.join(root,page)
-      dst = os.path.join(X['pages']['dst'],page)
-      print_page(src,dst)
+      name = os.path.splitext(page)[0]
+      src  = os.path.join(root,page)
+      dst  = os.path.join(X['pages']['dst'],page)
+      print_page(src,dst,name)
   # MATLAB pages
   for root, dirs, pages in os.walk(X['mlab']['pages']['dst']):
     for page in pages:
-      src = os.path.join(root,page)
-      dst = os.path.join(root,page)
-      print_page(src,dst)
+      if '.html' in page:
+        name = os.path.splitext(page)[0]
+        src = os.path.join(root,page)
+        dst = os.path.join(root,page)
+        print_page(src,dst,name)
 
-def print_page(src,dst):
+def print_page(src,dst,name):
+  global X
+  
   # read the template
-  template = file_read(X['template']['html'])
+  template  = file_read(X['template']['html'])
   # read the file contents
-  content  = file_read(src)
+  content   = file_read(src)
   # generate the navbar using relative links
-  navstr   = print_navbar(dst)
+  navstr    = print_navbar(dst)
+  # get the relative link to style
+  stylelink = rel_link(dst,X['style']['dst'])
   # add the content and navbar
-  pagestr  = add_to_template(template,'__content__',content)
-  pagestr  = add_to_template(pagestr, '__navbar__',navstr)
+  pagestr   = add_to_template(template,'__navbar__',navstr)
+  pagestr   = add_to_template(pagestr,'__content__',content)
+  pagestr   = add_to_template(pagestr,'__name__',name)
+  pagestr   = add_to_template(pagestr,'__style__',stylelink)
   # write to file
   file_write(dst,pagestr)
 
 def print_navbar(filepath):
   # print the navbar for any particular html page
   global X
-  
-  # print the navlink from the html page to one of the main pages
-  def nav_link(navstr,linkbase,page):
-    pagename = os.path.splitext(page)[0]
-    link     = os.path.join(linkbase,page)
-    navstr  += "      " + print_navlink(link, pagename) + "\n"
-    return navstr
   
   # get the relative link path
   linkbase = rel_link(filepath,X['pages']['dst'])
@@ -213,7 +226,13 @@ def print_navbar(filepath):
         navstr = nav_link(navstr,linkbase,page)
   navstr += "    </li></ul>"
   return navstr  
-    
+
+def nav_link(navstr,linkbase,page):
+  pagename = os.path.splitext(page)[0]
+  link     = os.path.join(linkbase,page)
+  navstr  += "      " + print_navlink(link, pagename) + "\n"
+  return navstr
+  
 def print_navlink(pagelink,pagename):
   navlinkstr = "<a class='expanded button' href='" \
              + pagelink + "'>" + pagename + "</a>"
@@ -256,12 +275,9 @@ def copyover(src,dst):
       print('%s' % e)
 
 def add_to_template(template,keystr,content):
+  pagestr = []
   for i in range(0,len(template)):
-    if template[i].find(keystr) >= 0:
-      idx = i
-  pagestr = template[:idx]
-  pagestr += content[:]
-  pagestr += template[idx+1:]
+    pagestr += [template[i].replace(keystr,''.join(c for c in content))]
   return pagestr
   
 def rel_link(src,dst):

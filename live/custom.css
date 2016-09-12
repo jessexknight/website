@@ -10,6 +10,7 @@ body{
 }
 .columns{
   padding: 0;
+  float: left !important;
 }
 .button{
   font-family: 'Century Gothic', sans-serif;
@@ -81,3 +82,10 @@ a{
   padding: 0 0 0 0;
   margin: 0 0 0 0;
 }
+pre {font-size: 12px; font-family: Consolas, monaco, monospace; color: #333333}
+pre.matlab-code .keyword {color: #0099ff;}
+pre.matlab-code .string  {color: #cc00ff;}
+pre.matlab-code .number  {color: #993333;}
+pre.matlab-code .comment, pre.matlab-code .comment span {color: #33cc33; font-weight: normal;}
+pre.matlab-code .bracket {color: #999999;}
+
