@@ -12,9 +12,6 @@ python manage.py [args], args:
 
 TO DO
 - package same name .m/other files into zip for download
-- sort .m files by subdirs
-- fix linking of css / js within all files files using __style__
-- columnize MATLAB.html
 - refactor entire code as OO
 
 
