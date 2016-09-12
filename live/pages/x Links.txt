@@ -1,7 +1,7 @@
 <html>
 <head>
 
-<title>Jesse Knight | Teaching</title>
+<title>Jesse Knight | x Links</title>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/foundation/6.2.3/foundation.min.js"></script>
 <link   rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.2.3/foundation.min.css">
@@ -17,43 +17,18 @@
     <ul class='expanded dropdown menu' data-dropdown-menu><li>
       <a class='expanded button' href='Home.html'>Home</a>
       <a class='expanded button' href='Awards.html'>Awards</a>
-      <a class='expanded button' href='Links.html'>Links</a>
       <a class='expanded button' href='MATLAB.html'>MATLAB</a>
       <a class='expanded button' href='Publications.html'>Publications</a>
       <a class='expanded button' href='Teaching.html'>Teaching</a>
+      <a class='expanded button' href='x Links.txt'>x Links</a>
     </li></ul>
   </div>
   <div id='content' class='small-8 medium-9 large-10 columns'
        style='background-color:#F5F5F5; padding: 5 5 5 5; min-height:100%'>
-    <div class='divh1'><h1>Teaching</h1></div>
+    
 
-<div class='divh2'><h2>Graduate Teaching Assistantships</h2></div>
-<h3>Guelph School of Engineering</h3>
-<p>
-ENGG 4660 - Medical Image Processing (W16) - 
-<a href='../docs/ENGG 4660 - Medical Image Processing (W16).pdf' target='_blank'>
-  Syllabus
-</a>
-<br>
-ENGG 4060 - BioMedical Signal Processing (W16) - 
-<a href='../docs/ENGG 4060 - BioMedical Signal Processing (W16).pdf' target='_blank'>
-  Syllabus
-</a>
-<br>
-ENGG 4040 - Medical Imaging Modalities (F15) - 
-<a href='../docs/ENGG 4040 - Medical Imaging Modalities (F15).pdf' target='_blank'>
-  Syllabus
-</a>
-</p>
 
-<div class='divh2'><h2>Guelph Engineering Peer Helpers</h2></div>
-<p>
-The
-<a href='https://www.uoguelph.ca/engineering/peer_helper' target='_blank'>
-  Engineering Peer Helpers
-</a>
- are a team of senior engineering students who support engineering neophytes through course-specific problem solving sessions, technical workshops, and one-on-one meetings.
-</p>
+https://www.mendeley.com/home/a/
   </div>
 </body>
 </html>

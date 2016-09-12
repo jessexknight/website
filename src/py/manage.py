@@ -163,7 +163,7 @@ def print_mlabdiv(mlabstr,lastdir,subdir):
     if lastdir != '':
       mlabstr += '</div>' # close the last div
     lastdir = subdir
-    mlabstr += "<div class='small-12 medium-6 large-4 columns' style='padding:0 10 0 0;'>" \
+    mlabstr += "<div class='small-12 medium-6 large-4 columns' style='padding:0 5 0 0;'>" \
             +  print_h2(subdir)
   return [mlabstr,lastdir]
   
