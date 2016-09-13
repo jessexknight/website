@@ -277,7 +277,9 @@ def copyover(src,dst):
 def add_to_template(template,keystr,content):
   pagestr = []
   for i in range(0,len(template)):
-    pagestr += [template[i].replace(keystr,''.join(c for c in content))]
+    pagestr += [template[i]\
+                .replace(keystr,''.join(c for c in content))\
+                .replace('\r\n','\r')]
   return pagestr
   
 def rel_link(src,dst):

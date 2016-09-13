@@ -13,5 +13,10 @@ python manage.py [args], args:
 TO DO
 - package same name .m/other files into zip for download
 - refactor entire code as OO
+- fix <pre> double lines in code
+- reconsider spacing of awards: fade to ... to avoid wrapping dates
+- hover-over for descriptions: MATLAB & awards
+- sticky menu for long content
+- hidden menu in small screens
 
 
