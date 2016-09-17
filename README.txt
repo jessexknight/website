@@ -18,5 +18,4 @@ TO DO
 - hover-over for descriptions: MATLAB & awards
 - sticky menu for long content
 - hidden menu in small screens
-
-
+- segmentation performance metrics example images
