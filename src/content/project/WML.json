@@ -1,0 +1,5 @@
+{
+  "name": "WML Segmentation",
+  "description": "White matter lesions (MWL) have been correlated with Multiple Sclerosis, Alzheimer's Disease, stroke risk, and other neurodegeneration. Currently, WMLs are outlined manually, but we aim do develop a fully automatic WML segmentation algorithm which uses FLAIR MRI alone.",
+  "img": "WML.png"
+}
