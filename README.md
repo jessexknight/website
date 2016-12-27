@@ -10,11 +10,13 @@
 `python main.py`\
 
 ## To Do
+
 #### General
 - [x] refactor entire code as OO
 - [ ] sticky menu for long content
 - [ ] hidden menu in small screens
 - [x] remove Awards page altogether
+
 #### Code Pages
 - [ ] finish refactoring OO for Code pages
 - [x] fix `<pre>` double lines in code
