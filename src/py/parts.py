@@ -45,21 +45,6 @@ class Part:
   
   def set_sub_content(self, keys):
     self.content = self.get_sub_content(keys)
-
-class Template(Part):
-  def __init__(self,name,src):
-    Part.__init__(self,name,src)
-
-class Page(Part):
-  def __init__(self,name,src,dst):
-    Part.__init__(self,name,src)
-    self.dst = link(dst)
-
-  def get_dst_link(self):
-    return self.dst.get_path()
-    
-  def write(self):
-    file_write(self.dst.get_path(), self.get_content())
      
 def get_dict_parts(dirname):
   dir = os.path.join(root.src,dirname)
@@ -69,25 +54,6 @@ def get_dict_parts(dirname):
     name = os.path.splitext(filename)[0]
     X.update({name:Part(name,os.path.join(dir,filename))})
   return X
-
-def get_dict_templates():
-  dir = os.path.join(root.src,'templates')
-  filenames = get_dir_filenames(dir)
-  T = {}
-  for filename in filenames:
-    name = os.path.splitext(filename)[0]
-    T.update({name:Template(name,os.path.join(dir,filename))})
-  return T
-  
-def get_dict_pages():
-  dir = os.path.join(root.src,'pages')
-  filenames = get_dir_filenames(dir)
-  P = {}
-  for filename in filenames:
-    name = os.path.splitext(filename)[0]
-    P.update({name:Page(name,os.path.join(dir,filename),\
-                             os.path.join(root.dst,'pages',filename))})
-  return P
 
 def part_list_fun(parts, fun):
   if isinstance(parts, list):
