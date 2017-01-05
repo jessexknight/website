@@ -5,12 +5,16 @@ from links import *
 from parts import *
 
 class Page(Part):
-  def __init__(self,name,src,dst):
+  def __init__(self,name,src,dst,live):
     Part.__init__(self,name,src)
-    self.dst = link(dst)
+    self.dst  = link(dst)
+    self.live = link(live)
 
   def get_dst_link(self):
     return self.dst.get_path()
+  
+  def get_live_link(self):
+    return self.live.get_path()
     
   def write(self):
     file_write(self.dst.get_path(), self.get_content())
@@ -22,7 +26,8 @@ def get_dict_pages():
   for filename in filenames:
     name = os.path.splitext(filename)[0]
     P.update({name:Page(name,os.path.join(dir,filename),\
-                             os.path.join(root.dst,'pages',filename))})
+                             os.path.join(root.dst,'pages',filename),\
+                             os.path.join(root.live,'pages',filename))})
   return P
 
 def write_pages(pages):
@@ -37,7 +42,7 @@ def write_pages(pages):
 def set_page_templates(templates,pages):
   # get the page names and links
   pagenames = part_list_fun(pages,'get_name')
-  pagelinks = part_list_fun(pages,'get_dst_link')
+  pagelinks = part_list_fun(pages,'get_live_link')
   # build the navbar using the navlink template
   for pagename,pagelink in zip(pagenames,pagelinks):
     pagedict = {'pagename':pagename,'pagelink':pagelink}
@@ -46,7 +51,7 @@ def set_page_templates(templates,pages):
   # update the page template with the navbar and icon
   templates['page'].set_sub_content(\
     {'navbar':templates['navbar'].get_content(),\
-     'icon':os.path.join(root.dst,'img','icon.png')})
+     'icon':os.path.join(root.imgs,'icon.png')})
   # add the template wrapper to each page
   for name,_ in pages.iteritems():
     pagedict = {'content':pages[name].get_content()}

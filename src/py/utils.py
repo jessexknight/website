@@ -5,13 +5,14 @@ import re
 from attrdict import AttrDict
 
 root = AttrDict()
-root.base = 'C:/users/jesse/documents/dev/website/website/'
-root.src  = os.path.join(root.base,'src')
-root.cont = os.path.join(root.base,'src','content')
-root.bib  = os.path.join(root.base,'src','docs','pubs.bib')
-root.dst  = os.path.join(root.base,'live')
-root.docs = os.path.join(root.base,'live','docs')
-root.imgs = os.path.join(root.base,'live','img')
+root.src  = 'C:/users/jesse/documents/dev/website/website/src/'
+root.dst  = 'C:/users/jesse/documents/dev/website/website/live/'
+root.live = root.dst
+#root.live = 'http://www.uoguelph.ca/~jknigh04/'
+root.cont = os.path.join(root.src,'content')
+root.bib  = os.path.join(root.src,'docs','pubs.bib')
+root.docs = os.path.join(root.live,'docs')
+root.imgs = os.path.join(root.live,'img')
  
 def copyover(src,dst):
   try:

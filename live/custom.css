@@ -6,10 +6,11 @@ body{
 .row{
   background-color:#E5E5E5;
   border-left: solid 5px #333333;
+  padding: 0 0 0 0;
   max-width:100%;
 }
 .columns{
-  padding: 0;
+  padding: 0 0 0 0;
   float: left !important;
 }
 .button{
@@ -19,14 +20,14 @@ body{
 }
 .divh1{
   padding: 8 8 8 8;
-  margin: 0;
+  margin: 5 0 0 5;
   clear: both;
   background-color: #2199E8;
   border-left: solid 5px #333333;
 }
 .divh2{
   padding: 5 8 5 8;
-  margin: 10 0 10 0;
+  margin: 5 0 0 5;
   clear: both;
   background-color: #E5E5E5;
   border-left: solid 5px #2199E8;

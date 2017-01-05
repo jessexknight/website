@@ -27,8 +27,9 @@ class Publication:
   
   def print_title(self):
     title = self.get_data('title')
-    link  = os.path.join(root.dst,'docs',self.get_data('ID')+'.pdf')
-    if os.path.isfile(link):
+    dst  = os.path.join(root.dst,'docs',self.get_data('ID')+'.pdf')
+    link = os.path.join(root.docs,self.get_data('ID')+'.pdf')
+    if os.path.isfile(dst):
       titlestr = '"<a href="'+link+'" target="_blank">'+title+'</a>" '
     else:
       titlestr = '"'+title+'" '
