@@ -6,8 +6,7 @@
 - `live`: contains all files necessary to launch the website
 
 ### Main file
-`main.py`: the main file for generating all website pages automatically -- usage:\
-`python main.py`\
+`main.py`: the main file for generating all website pages automatically -- usage: `python main.py`
 
 ## To Do
 
@@ -15,6 +14,7 @@
 - [x] refactor entire code as OO
 - [x] sticky menu for long content
 - [ ] put back awards page / transcripts (hide under sample work?)
+- [ ] live links need to be relative
 
 #### Projects
 - [ ] Two templates: mini box and full page w. publications
