@@ -13,12 +13,16 @@
 </head>
 <body>
   <div id='navbar' class='small-12 medium-3 large-2 columns'
-       style='background-color:#333333; padding: 5 5 5 5;'>
+       style='background-color:#333333; padding: 0;'
+       data-sticky-container>
     __navbar__
   </div>
   <div id='content' class='small-12 medium-9 large-10 columns'
-       style='background-color:#F5F5F5; padding: 5 5 5 5; min-height:100%'>
+       style='background-color:#F5F5F5; padding: 5; min-height:100%'>
     __content__
   </div>
+  <script>
+    $(document).foundation();
+  </script>
 </body>
 </html>

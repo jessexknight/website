@@ -1,0 +1,6 @@
+{
+  "name": "Modelling and Correcting Bias Field in MRI",
+  "link": "__docs__Sample - Bias Field Paper.pdf",
+  "img": "__img__biasfield.png",
+  "description": "Tutorial-style paper on managing bias field artifact in MRI, from 'Linear Systems in Engineering' course."
+}

@@ -98,13 +98,13 @@ class Publication:
     string += '</p>'
     return string
 
-def write_all_publications(bibfile,templates):
-  publications = get_list_publications(bibfile)
-  years, publications = sort_pub_years(publications)
+def write_list_publications(publications,templates,yearheading=False):
+  years, publications = sort_publication_years(publications)
   pubstr = ''
   for i,publication in enumerate(publications):
-    if (i==0) or (years[i] != years[i-1]): # current or changing year
-      pubstr += templates['h2'].get_sub_content({'h2':years[i]})
+    if yearheading:
+      if (i==0) or (years[i] != years[i-1]): # current or changing year
+        pubstr += templates['h2'].get_sub_content({'h2':years[i]})
     pubstr += publication.write_string()
   pubstr = templates['contentdiv'].get_sub_content({'content':pubstr,'width':'800px'})
   return pubstr
@@ -117,7 +117,7 @@ def get_list_publications(bibfile):
       P.append(Publication(data))
     return P
 
-def sort_pub_years(publications):
+def sort_publication_years(publications):
   years = []
   for i in range(0,len(publications)):
     years += [publications[i].get_data('year')]
@@ -127,4 +127,12 @@ def sort_pub_years(publications):
   years        = [years[i]        for i in idx]
   publications = [publications[i] for i in idx]
   return years, publications
+  
+def get_publications_by_id(publications, idlist):
+  P = []
+  for publication in publications:
+    if publication.get_data('ID') in idlist:
+      P.append(publication)
+  return P
+
   

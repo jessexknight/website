@@ -13,47 +13,57 @@
 </head>
 <body>
   <div id='navbar' class='small-12 medium-3 large-2 columns'
-       style='background-color:#333333; padding: 5 5 5 5;'>
-    <ul class='expanded dropdown vertical menu' data-magellan>
+       style='background-color:#333333; padding: 0;'
+       data-sticky-container>
+    <div class="columns sticky" data-sticky data-margin-top="0"
+style='margin: 0; padding: 0; min-height:fill-available'>
+<ul class='expanded dropdown vertical menu' data-magellan
+style='margin: 0; padding: 5; min-height:100%'>
 <li><a class='expanded button' href="C:/users/jesse/documents/dev/website/website/live\pages\Home.html">Home</a></li>
 
 <li><a class='expanded button' href="C:/users/jesse/documents/dev/website/website/live\pages\Publications.html">Publications</a></li>
 
 <li><a class='expanded button' href="C:/users/jesse/documents/dev/website/website/live\pages\Teaching.html">Teaching</a></li>
 
-<li><a class='expanded button' href="C:/users/jesse/documents/dev/website/website/live\pages\Code.html">Code</a></li>
+<li><a class='expanded button' href="C:/users/jesse/documents/dev/website/website/live\pages\Sample Work.html">Sample Work</a></li>
 
 <li><a class='expanded button' href="C:/users/jesse/documents/dev/website/website/live\pages\Links.html">Links</a></li>
 
 </ul>
+</div>
+
   </div>
   <div id='content' class='small-12 medium-9 large-10 columns'
-       style='background-color:#F5F5F5; padding: 5 5 5 5; min-height:100%'>
+       style='background-color:#F5F5F5; padding: 5; min-height:100%'>
     <div class='divh1'><h1>Neat Links</h1></div>
-
 <div class='divh2'><h2>PC Tools</h2></div>
 <p>
 <a target='_blank' href='https://msdn.microsoft.com/powershell'>Windows Powershell</a> - a nice improvement on the vanilla windows <tt>cmd</tt>
 <br>
-<a target='_blank' href='https://windirstat.info/'>WinDirStat</a> - great little tool for visualizing disk space
+<a target='_blank' href='https://windirstat.info/'>WinDirStat</a> - great tool for visualizing disk space
 <br>
-<a target='_blank' href='https://chrome.google.com/webstore/detail/mendeley-importer/dagcmkpagjlhakfdhnbomgmjdpkdklff?hl=en'>Mendeley Chrome plugin</a> - references management
+<a target='_blank' href='https://chrome.google.com/webstore/detail/mendeley-importer/dagcmkpagjlhakfdhnbomgmjdpkdklff?hl=en'>Mendeley Chrome plugin</a> - easy reference management
 <br>
 <a target='_blank' href='https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe'>Stylish</a> - facebook in black? Overwrite the css of most major sites
 <br>
 </p>
-<div class='divh2'><h2>Medical Imaging</h2></div><p>
+<div class='divh2'><h2>Medical Imaging</h2></div>
 <p>
 <a target='_blank' href='https://grand-challenge.org/All_Challenges/'>MICCAI Grand Challenges</a> - great open source imaging data and cutting edge challenges
 <br>
+<a target='_blank' href='https://portal.fli-iam.irisa.fr/msseg-challenge/overview'>MS Seg Competition</a> - 2016 Multiple Sclerosis Lesion Segmentation Competition at MICCAI
+<br>
 <a target='_blank' href='http://www.msdiscovery.org/sites/default/files/MGrid_crop4_full_0.gif'>MS Timelapse</a> - fascinating FLAIR MRI timelapse: MS patient weekly for one year
 <br>
-<\p>
+</p>
 
 
 
 
 
   </div>
+  <script>
+    $(document).foundation();
+  </script>
 </body>
 </html>

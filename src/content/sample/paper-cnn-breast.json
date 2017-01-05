@@ -1,0 +1,6 @@
+{
+  "name": "A CNN to Assess Malignancy in Breast Cancer Histology",
+  "link": "__docs__Sample - Conv Net Breast Cancer.pdf",
+  "img": "__img__cnn-breast.png",
+  "description": "CNN approach to breast cancer histopathology image classification, from 'Introduction to Machine Learning' course."
+}

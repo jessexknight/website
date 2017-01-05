@@ -54,12 +54,13 @@ def set_page_templates(templates,pages):
     pages[name].set_sub_content({'pagename':name})
   return templates, pages
 
-def add_json_parts(template, pages):
-  partname = template.get_name()
+def add_json_parts(template, pages, partname=None):
+  if partname is None:
+    partname = template.get_name()
   parts = get_dict_parts(os.path.join(root.cont, partname))
   for itemname,_ in parts.iteritems():
     itemdict = json.loads(parts[itemname].get_content())
-    itemkey  = partname+'.'+itemname
+    itemkey  = template.get_name()+'.'+itemname
     if isinstance(pages,Page):
       pages.set_sub_content({itemkey:template.get_sub_content(itemdict)})
     elif isinstance(pages,dict):
