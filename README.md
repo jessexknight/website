@@ -13,12 +13,15 @@
 
 #### General
 - [x] refactor entire code as OO
-- [ ] sticky menu for long content
-- [ ] hidden menu in small screens
-- [x] remove Awards page altogether
+- [x] sticky menu for long content
+- [ ] put back awards page / transcripts (hide under sample work?)
 
-#### Code Pages
-- [ ] finish refactoring OO for Code pages
+#### Projects
+- [ ] Two templates: mini box and full page w. publications
+- [ ] Develop sub-page framework
+
+#### Abandoned
 - [x] fix `<pre>` double lines in code
-- [ ] package same name .m/other files into zip for download
-- [ ] hover-over for descriptions of Code
+- [x] finish refactoring OO for Code pages - git instead
+- [x] package same name .m/other files into zip for download - same as above
+- [x] hidden menu in small screens - hamburgers are stupid
