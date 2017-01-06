@@ -3,6 +3,8 @@ A personal website: live files, and source code for template-based generation (l
 
 Mostly a fun project for learning web dev, and overcoming the deficiencies of LinkedIn.
 
+Link to the live site: http://www.uoguelph.ca/~jknigh04
+
 ## Overview
 
 `src`:  contains files used during development and compilation
