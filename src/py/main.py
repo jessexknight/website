@@ -17,12 +17,15 @@ pubstr               = write_list_publications(publications,templates,True)
 pages['Home']        = add_json_parts(templates['projectbox'],pages['Home'],'project')
 pages['Home']        = add_json_parts(templates['linkimg'],pages['Home'])
 pages['Teaching']    = add_json_parts(templates['course'], pages['Teaching'])
+pages['Teaching']    = add_json_parts(templates['samplebox'],pages['Teaching'],'sample')
 pages['Links']       = add_json_parts(templates['linktxt'],pages['Links'])
 pages['Sample Work'] = add_json_parts(templates['samplebox'],pages['Sample Work'],'sample')
-
+# some special case clean-up
 pages['Publications'].set_sub_content({'publications':pubstr})
 pages['Home'].set_sub_content({'imgwidth':'25%'})
-pages['Home'].set_sub_content({'img':os.path.join(root.imgs,'')})
-pages['Sample Work'].set_sub_content({'docs':os.path.join(root.docs,'')})
-pages['Sample Work'].set_sub_content({'img':os.path.join(root.imgs,'')})
+# cleaning up any missing docs/img links
+for key in pages.keys():
+  pages[key].set_sub_content({'docs':os.path.join(root.docs,'')})
+  pages[key].set_sub_content({'img':os.path.join(root.imgs,'')})
+  
 write_pages(pages)

@@ -5,7 +5,6 @@ body{
 }
 .row{
   background-color:#E5E5E5;
-  border-left: solid 5px #333333;
   padding: 0 0 0 0;
   max-width:100%;
 }
