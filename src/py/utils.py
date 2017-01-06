@@ -7,8 +7,8 @@ from attrdict import AttrDict
 root = AttrDict()
 root.src  = 'C:/users/jesse/documents/dev/website/website/src/'
 root.dst  = 'C:/users/jesse/documents/dev/website/website/live/'
-root.live = root.dst
-#root.live = 'http://www.uoguelph.ca/~jknigh04/'
+#root.live = root.dst
+root.live = 'http://www.uoguelph.ca/~jknigh04/'
 root.cont = os.path.join(root.src,'content')
 root.bib  = os.path.join(root.src,'docs','pubs.bib')
 root.docs = os.path.join(root.live,'docs')

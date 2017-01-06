@@ -1,9 +1,20 @@
 # Website
+A personal website: live files, and source code for template-based generation (like Genshi).
+
+Mostly a fun project for learning web dev, and overcoming the deficiencies of LinkedIn.
 
 ## Overview
 
-- `src`:  contains files used during development and compilation
-- `live`: contains all files necessary to launch the website
+`src`:  contains files used during development and compilation
+- `\py`: python class files and `main` file.
+- `\templates`: template html snippits populated using `__example__`-style keywords
+- `\content`: json "objects" which provide different content for each template
+- `\pages`: main pages for the site
+
+`live`: contains all files necessary to launch the website:
+- `\pages`: written by `main.py`
+- `\docs`: all documents (e.g. PDFs) linked from the site
+- `\img`: all images
 
 ### Main file
 `main.py`: the main file for generating all website pages automatically -- usage: `python main.py`
@@ -13,10 +24,11 @@
 #### General
 - [x] refactor entire code as OO
 - [x] sticky menu for long content
+- [x] live links need to be relative
 - [ ] put back awards page / transcripts (hide under sample work?)
-- [ ] live links need to be relative
+- [ ] documentation of python
 
-#### Projects
+#### Mini-Projects
 - [ ] Two templates: mini box and full page w. publications
 - [ ] Develop sub-page framework
 
