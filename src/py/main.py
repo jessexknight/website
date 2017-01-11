@@ -5,6 +5,13 @@ from parts import *
 from pages import *
 from pubs  import *
 
+# set the path variables
+mode = sys.argv[1]
+if mode == 'dev':
+  root.live = root.dst
+  root.docs = os.path.join(root.live,'docs')
+  root.imgs = os.path.join(root.live,'img')
+
 # read all the templates and the pages
 templates            = get_dict_parts(os.path.join(root.src,'templates'))
 pages                = get_dict_pages()

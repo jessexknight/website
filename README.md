@@ -5,7 +5,7 @@ Mostly a fun project for learning web dev, and overcoming the deficiencies of Li
 
 Link to the live site: http://www.uoguelph.ca/~jknigh04
 
-## Overview
+## Overview 
 
 `src`:  contains files used during development and compilation
 - `\py`: python class files and `main` file.
@@ -29,6 +29,8 @@ Link to the live site: http://www.uoguelph.ca/~jknigh04
 - [x] live links need to be relative
 - [ ] put back awards page / transcripts (hide under sample work?)
 - [ ] documentation of python
+- [x] add command line option for "dev" mode: local links
+- [x] add more sample work: ML course, poster
 
 #### Mini-Projects
 - [ ] Two templates: mini box and full page w. publications
